@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Position {
 
     private long id;
@@ -12,6 +14,7 @@ public class Position {
     private double latitude;
     private double longitude;
     private String deviceTime; // Puede ser String o Date según tus necesidades
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss'Z'") // Formato de fecha, ajusta según tu necesidad
     private Date fixTime; // Asumimos que este es un objeto Date, puedes cambiarlo según tu implementación
     private Map<String, Object> attributes = new HashMap<>();
 

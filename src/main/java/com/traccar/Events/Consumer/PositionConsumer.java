@@ -21,6 +21,7 @@ public class PositionConsumer {
 
     @RabbitListener(queues = "positionsQueue")
     public void onPositionReceived(Position position) {
+        System.out.println("Mensaje recibido: " + position);
         // Procesa la posición con todos los handlers
         List<com.traccar.Events.Model.Event> events = eventPipeline.process(position);
         // Guarda y reenvía cada evento

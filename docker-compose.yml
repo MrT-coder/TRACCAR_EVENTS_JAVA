@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    # Opcional: puedes definir volúmenes para persistencia de datos
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"     # Puerto para AMQP
+      - "15672:15672"   # Panel de administración
+    # Usuario y contraseña por defecto: guest/guest
+
+  events-service:
+    build: .
+    container_name: events-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mongodb
+      - rabbitmq
+    environment:
+      # Ajusta según tu application.properties
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_DATABASE: mcs_events_database
+
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
