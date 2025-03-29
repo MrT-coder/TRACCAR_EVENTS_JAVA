@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "events.behavior.accelerationThreshold",
+    "type": "java.lang.String",
+    "description": "A description for 'events.behavior.accelerationThreshold'"
+  },
+  {
+    "name": "events.behavior.brakingThreshold",
+    "type": "java.lang.String",
+    "description": "A description for 'events.behavior.brakingThreshold'"
+  },
+  {
+    "name": "events.ignoreDuplicateAlerts",
+    "type": "java.lang.String",
+    "description": "A description for 'events.ignoreDuplicateAlerts'"
+  }
+]}

@@ -22,14 +22,14 @@ public class EventPipeline {
     public List<Event> process(Position position) {
         List<Event> result = new ArrayList<>();
         for (BaseEventHandler handler : eventHandlers) {
-            Event event = handler.analyze(position);
+            List<Event> event = handler.analyze(position);
             if (event != null) {
                 // Verifica si hay notificación activa para deviceId + eventType
                 boolean active = notificationConfigCache.isNotificationActive(
-                        event.getDeviceId(), event.getType());
+                        ((Event) event).getDeviceId(), ((Event) event).getType());
                 if (active) {
                     // Solo agregamos el evento si hay notificación configurada
-                    result.add(event);
+                    result.addAll(event);
                 }
             }
         }
