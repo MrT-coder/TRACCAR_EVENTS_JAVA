@@ -5,7 +5,7 @@ services:
     image: mongo:6.0
     container_name: mongodb
     ports:
-      - "27017:27017"
+      - "27018:27017"
     # Opcional: puedes definir volúmenes para persistencia de datos
 
   rabbitmq:

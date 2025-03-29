@@ -22,8 +22,9 @@ public class EventService {
     private EventForwarder eventForwarder;
 
     public Event storeEvent(Event event) {
-        // Persiste en MongoDB
+        System.out.println("Guardando evento: " + event);
         Event savedEvent = eventRepository.save(event);
+        System.out.println("Evento guardado en Mongo con ID: " + savedEvent.getId());
 
         // Reenvía a la cola "eventsQueue" (p. ej. para que Notifications lo procese)
         EventData eventData = new EventData();
@@ -34,6 +35,8 @@ public class EventService {
             public void onResult(boolean success, Exception e) {
                 if (!success) {
                     System.err.println("Error al reenviar evento: " + e.getMessage());
+                } else {
+                    System.out.println("Evento reenviado exitosamente");
                 }
             }
         });
@@ -44,7 +47,7 @@ public class EventService {
         Optional<Event> eventOpt = eventRepository.findById(id);
         if (eventOpt.isEmpty()) {
             throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Event not found with id: " + id);
+                    HttpStatus.NOT_FOUND, "Event not found with id: " + id);
         }
         return eventOpt.get();
     }

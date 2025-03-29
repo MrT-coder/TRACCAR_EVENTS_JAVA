@@ -1,5 +1,6 @@
 package com.traccar.Events.Consumer;
 
+import com.traccar.Events.Model.Event;
 import com.traccar.Events.Model.Position;
 import com.traccar.Events.Pipeline.EventPipeline;
 import com.traccar.Events.Servicies.EventService;
@@ -19,13 +20,13 @@ public class PositionConsumer {
         this.eventService = eventService;
     }
 
-    @RabbitListener(queues = "positionsQueue")
+    @RabbitListener(queues = "positionsQueue", concurrency = "1-5")
     public void onPositionReceived(Position position) {
         System.out.println("Mensaje recibido: " + position);
         // Procesa la posición con todos los handlers
         List<com.traccar.Events.Model.Event> events = eventPipeline.process(position);
         // Guarda y reenvía cada evento
-        for (com.traccar.Events.Model.Event event : events) {
+        for (Event event : events) {
             eventService.storeEvent(event);
         }
     }
