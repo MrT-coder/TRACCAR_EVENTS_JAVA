@@ -35,6 +35,7 @@ public class BehaviorEventHandler extends BaseEventHandler {
         if (lastPosition != null && !position.getFixTime().equals(lastPosition.getFixTime())) {
             long timeDiff = position.getFixTime().getTime() - lastPosition.getFixTime().getTime();
             if (timeDiff <= 0) {
+                System.out.println("Tiempo de diferencia <= 0 para deviceId " + position.getDeviceId());
                 return events;
             }
             // Calcula la diferencia de velocidad (en nudos) y la convierte a m/s
@@ -42,6 +43,12 @@ public class BehaviorEventHandler extends BaseEventHandler {
             double speedDiffMps = UnitsConverter.mpsFromKnots(speedDiffKnots);
             // Calcula la aceleración (m/s²)
             double acceleration = (speedDiffMps * 1000) / timeDiff;
+
+            System.out.println("Device " + position.getDeviceId() +
+            " - velocidad anterior: " + lastPosition.getSpeed() +
+            ", velocidad actual: " + position.getSpeed() +
+            ", tiempoDiff: " + timeDiff +
+            ", aceleración: " + acceleration);
 
             if (accelerationThreshold != 0 && acceleration >= accelerationThreshold) {
                 Event event = new Event();
@@ -58,6 +65,8 @@ public class BehaviorEventHandler extends BaseEventHandler {
                 event.set(Position.KEY_ALARM, Position.ALARM_BRAKING);
                 events.add(event);
             }
+        } else {
+            System.out.println("No hay posición previa registrada para deviceId " + position.getDeviceId());
         }
         return events;
     }
