@@ -38,4 +38,13 @@ public class EventPipeline {
         }
         return result;
     }
+
+    public List<Event> processUsingPrevious(Position current, Position previous) {
+        List<Event> result = new ArrayList<>();
+        for (BaseEventHandler handler : eventHandlers) {
+            // Cada handler decidirá qué hacer con previous (si es que le interesa)
+            result.addAll(handler.analyze(current, previous));
+        }
+        return result;
+    }
 }
