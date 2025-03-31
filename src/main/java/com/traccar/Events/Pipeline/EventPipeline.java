@@ -39,11 +39,19 @@ public class EventPipeline {
         return result;
     }
 
-    public List<Event> processUsingPrevious(Position current, Position previous) {
+    public List<Event> processUsingPrevious(Position currentPosition, Position previousPosition) {
         List<Event> result = new ArrayList<>();
         for (BaseEventHandler handler : eventHandlers) {
-            // Cada handler decidirá qué hacer con previous (si es que le interesa)
-            result.addAll(handler.analyze(current, previous));
+            List<Event> eventsFromHandler = handler.analyze(currentPosition, previousPosition);
+            for (Event event : eventsFromHandler) {
+                // Solo agrega el evento si la notificación está activa para ese deviceId y tipo de evento
+                boolean active = notificationConfigCache.isNotificationActive(event.getDeviceId(), event.getType());
+                if (active) {
+                    result.add(event);
+                } else {
+                    System.out.println("Notificación inactiva para deviceId " + event.getDeviceId() + " y tipo " + event.getType());
+                }
+            }
         }
         return result;
     }
