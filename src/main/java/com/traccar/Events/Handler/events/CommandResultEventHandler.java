@@ -23,7 +23,10 @@ public class CommandResultEventHandler extends BaseEventHandler {
             event.setPositionId(currentPosition.getId());
             event.set(Position.KEY_RESULT, (String) commandResult);
             events.add(event);
+        }else{
+            System.out.println("No hay resultado de comando para el dispositivo " + currentPosition.getDeviceId());
         }
+
         return events;
     }
 }
