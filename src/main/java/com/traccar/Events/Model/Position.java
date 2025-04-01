@@ -17,11 +17,13 @@ public class Position {
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss'Z'") // Formato de fecha, ajusta según tu necesidad
     private Date fixTime; // Asumimos que este es un objeto Date, puedes cambiarlo según tu implementación
     private Map<String, Object> attributes = new HashMap<>();
-
+// Define la constante para el driverUniqueId:
+    public static final String KEY_DRIVER_UNIQUE_ID = "driverUniqueId"; 
     // Constante para la clave de alarma
     public static final String KEY_ALARM = "alarm";
     public static final String ALARM_ACCELERATION = "acceleration";
     public static final String ALARM_BRAKING = "braking";
+    public static final Object KEY_RESULT = null;
 
     // Getters y Setters
     public long getId() {
