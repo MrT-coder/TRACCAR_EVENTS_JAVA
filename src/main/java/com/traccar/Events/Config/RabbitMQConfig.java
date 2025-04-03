@@ -67,6 +67,10 @@ public class RabbitMQConfig {
     public Queue positionsQueue5() {
         return new Queue(POSITIONS_QUEUE_5, true);
     }
+    @Bean
+    public Queue notificationQueue() {
+        return new Queue(NOTIFICATION_QUEUE, true);
+    }
 
     // Cada binding se define con un peso; por simplicidad, usamos "1" para cada cola.
     @Bean
@@ -89,6 +93,10 @@ public class RabbitMQConfig {
     public Binding bindingPositionsQueue5(CustomExchange positionsExchange, Queue positionsQueue5) {
         return BindingBuilder.bind(positionsQueue5).to(positionsExchange).with("1").noargs();
     }
+    @Bean
+    public Binding bindingNotificationQueue(CustomExchange positionsExchange, Queue notificationQueue) {
+        return BindingBuilder.bind(notificationQueue).to(positionsExchange).with("1").noargs();
+    }
 
     // Exchange, cola y binding para eventos (sin cambios)
     @Bean
@@ -105,7 +113,17 @@ public class RabbitMQConfig {
                 .to(eventsExchange)
                 .with(EVENTS_ROUTING_KEY);
     }
-
+    // Exchange y cola para notificaciones (sin cambios)
+    @Bean
+    public org.springframework.amqp.core.TopicExchange notificationExchange() {
+        return new org.springframework.amqp.core.TopicExchange(NOTIFICATION_EXCHANGE);
+    }
+    @Bean
+    public Binding bindingNotificationQueueAlt(Queue notificationQueue, org.springframework.amqp.core.TopicExchange notificationExchange) {
+        return BindingBuilder.bind(notificationQueue)
+                .to(notificationExchange)
+                .with(NOTIFICATION_ROUTING_KEY);
+    }
     // Configuración del convertidor de mensajes
     @Bean
     public MessageConverter jsonMessageConverter() {
