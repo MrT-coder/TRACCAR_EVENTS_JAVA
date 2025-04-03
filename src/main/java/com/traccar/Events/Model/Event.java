@@ -130,9 +130,9 @@ public class Event {
         return attributes.containsKey(key);
     }
 
-    public void set(Object keyResult, String commandResult) {
-        if (commandResult != null) {
-            attributes.put((String) keyResult, commandResult);
+    public void set(Object keyResult, Object type2) {
+        if (type2 != null) {
+            attributes.put((String) keyResult, type2);
         }
     }
 

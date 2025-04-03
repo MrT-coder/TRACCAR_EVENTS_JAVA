@@ -24,6 +24,11 @@ public class Position {
     public static final String ALARM_ACCELERATION = "acceleration";
     public static final String ALARM_BRAKING = "braking";
     public static final Object KEY_RESULT = null;
+    public static final String KEY_FUEL_LEVEL = null;
+    public static final String KEY_IGNITION = null;
+    public static final Object KEY_IMAGE = null;
+    public static final String KEY_VIDEO = null;
+    public static final String KEY_AUDIO = null;
 
     // Getters y Setters
     public long getId() {
@@ -83,8 +88,8 @@ public class Position {
     }
 
     // Método para obtener un atributo como String
-    public String getString(String key) {
-        Object value = attributes.get(key);
+    public String getString(Object type) {
+        Object value = attributes.get(type);
         return value != null ? value.toString() : null;
     }
 
@@ -99,5 +104,22 @@ public class Position {
 
     public void setFixTime(Date fixTime) {
         this.fixTime = fixTime;
+    }
+    public boolean hasAttribute(Object type) {
+        return attributes.containsKey(type);
+    }
+
+    // Método para obtener un valor como Double
+    public double getDouble(String key) {
+        Object value = attributes.get(key);
+        if (value instanceof Number) {
+            return ((Number) value).doubleValue();
+        }
+        return 0.0;
+    }
+
+    public boolean getBoolean(String keyIgnition) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBoolean'");
     }
 }
