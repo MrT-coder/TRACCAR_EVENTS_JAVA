@@ -2,8 +2,10 @@ package com.traccar.Events.Servicies;
 
 import com.traccar.Events.Messaging.EventData;
 import com.traccar.Events.Messaging.EventForwarder;
+import com.traccar.Events.Messaging.RabbitMQEventForwarder;
 import com.traccar.Events.Messaging.ResultHandler;
 import com.traccar.Events.Model.Event;
+import com.traccar.Events.Model.Notification;
 import com.traccar.Events.Repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,8 +42,25 @@ public class EventService {
                 }
             }
         });
+
+ // Una vez que el evento se ha almacenado y reenviado, se crea una notificación
+        Notification notification = new Notification();
+        // Asumimos que el objeto Event tiene los métodos getDeviceId(), getEventType() y getMessage()
+        notification.setDeviceId(savedEvent.getDeviceId());
+        notification.setEventType(savedEvent.getType()); 
+
+        // Enviar la notificación a la cola de notificaciones.
+        // Verificamos si el eventForwarder es una instancia de RabbitMQEventForwarder, ya que es allí donde se implementa forwardNotification.
+        if (eventForwarder instanceof RabbitMQEventForwarder) {
+            ((RabbitMQEventForwarder) eventForwarder).forwardNotification(notification);
+        } else {
+            System.err.println("El forwarder actual no soporta envío de notificaciones.");
+        }
+
         return savedEvent;
     }
+
+
 
     public Event getEventById(String id, long currentUserId) {
         Optional<Event> eventOpt = eventRepository.findById(id);

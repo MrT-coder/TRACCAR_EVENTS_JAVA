@@ -31,6 +31,11 @@ public class RabbitMQConfig {
     public static final String EVENTS_QUEUE = "eventsQueue";
     public static final String EVENTS_ROUTING_KEY = "event.routing.key";
 
+    // Cola para notificaciones (puedes cambiar el nombre según tu preferencia)
+    public static final String NOTIFICATION_QUEUE = "notificationQueue";
+    public static final String NOTIFICATION_EXCHANGE = "notificationExchange";
+    public static final String NOTIFICATION_ROUTING_KEY = "notification.routing.key";
+
     // Define un CustomExchange de tipo x-consistent-hash
     @Bean
     public CustomExchange positionsExchange() {
