@@ -23,12 +23,12 @@ public class Position {
     public static final String KEY_ALARM = "alarm";
     public static final String ALARM_ACCELERATION = "acceleration";
     public static final String ALARM_BRAKING = "braking";
-    public static final Object KEY_RESULT = null;
-    public static final String KEY_FUEL_LEVEL = null;
-    public static final boolean KEY_IGNITION =true;
-    public static final Object KEY_IMAGE = null;
-    public static final String KEY_VIDEO = null;
-    public static final String KEY_AUDIO = null;
+    public static final String KEY_RESULT = "result";
+    public static final String KEY_FUEL_LEVEL = "fuel";
+    public static final String KEY_IGNITION ="ignition";
+    public static final String KEY_IMAGE = "image";
+    public static final String KEY_VIDEO = "video";
+    public static final String KEY_AUDIO = "audio";
 
     // Getters y Setters
     public long getId() {

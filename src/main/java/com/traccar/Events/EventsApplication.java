@@ -26,7 +26,8 @@ public class EventsApplication {
             // Habilitar notificaciones
             notificationConfigCache.enableNotification(101, "alarm"); 
             notificationConfigCache.enableNotification(102, "alarm"); 
-            notificationConfigCache.enableNotification(105, "driverChanged");
+            notificationConfigCache.enableNotification(105, "commandResult");
+            notificationConfigCache.enableNotification(104, "commandResult");
 
             // Registrar en los logs las notificaciones habilitadas
             logger.info("Notificación para device 101 de tipo 'alarm' habilitada.");
