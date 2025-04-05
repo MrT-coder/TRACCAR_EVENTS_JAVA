@@ -45,4 +45,4 @@ services:
 
 networks:
   mcs_network:
-    external: true    
+    driver: bridge    

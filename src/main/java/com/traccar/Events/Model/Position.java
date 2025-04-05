@@ -25,7 +25,7 @@ public class Position {
     public static final String ALARM_BRAKING = "braking";
     public static final Object KEY_RESULT = null;
     public static final String KEY_FUEL_LEVEL = null;
-    public static final String KEY_IGNITION = null;
+    public static final boolean KEY_IGNITION =true;
     public static final Object KEY_IMAGE = null;
     public static final String KEY_VIDEO = null;
     public static final String KEY_AUDIO = null;
@@ -118,8 +118,8 @@ public class Position {
         return 0.0;
     }
 
-    public boolean getBoolean(String keyIgnition) {
-        // TODO Auto-generated method stub
+    public boolean getBoolean(boolean keyIgnition) {
+        
         throw new UnsupportedOperationException("Unimplemented method 'getBoolean'");
-    }
+    }  
 }

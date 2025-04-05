@@ -12,3 +12,5 @@ public abstract class BaseEventHandler {
         return analyze(current);
     }
 }
+
+
