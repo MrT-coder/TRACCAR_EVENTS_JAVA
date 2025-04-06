@@ -29,7 +29,7 @@ public class IgnitionEventHandler extends BaseEventHandler {
 
         // Verifica si la posición tiene el atributo de ignición
         if (currentPosition.hasAttribute(Position.KEY_IGNITION)) {
-            boolean ignition = currentPosition.getBoolean(Position.KEY_IGNITION);
+            boolean ignition = currentPosition.getBoo lean(Position.KEY_IGNITION);
 
 
             // Obtén la última posición si no se pasa la posición previa
