@@ -21,4 +21,6 @@ public class NotificationConfigCache {
     public boolean isNotificationActive(long deviceId, String eventType) {
         return activeNotifications.getOrDefault(deviceId + ":" + eventType, false);
     }
+
+    
 }

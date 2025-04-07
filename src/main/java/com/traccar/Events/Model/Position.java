@@ -24,7 +24,7 @@ public class Position {
     public static final String ALARM_ACCELERATION = "acceleration";
     public static final String ALARM_BRAKING = "braking";
     public static final String KEY_RESULT = "result";
-    public static final String KEY_FUEL_LEVEL = "fuel";
+    public static final String KEY_FUEL_LEVEL = "fuelLevel";
     public static final String KEY_IGNITION ="ignition";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_VIDEO = "video";
@@ -109,17 +109,35 @@ public class Position {
         return attributes.containsKey(type);
     }
 
-    // Método para obtener un valor como Double
-    public double getDouble(String key) {
-        Object value = attributes.get(key);
-        if (value instanceof Number) {
-            return ((Number) value).doubleValue();
-        }
-        return 0.0;
+   // Método para obtener un valor como Double
+   public boolean getBoolean(String key) {
+    Object value = attributes.get(key);
+    if (value instanceof Boolean) {
+        return (Boolean) value;  // Si el valor es un booleano, retorna ese valor
+    } else if (value instanceof String) {
+        // Si el valor es una cadena, intenta convertirla a booleano
+        return Boolean.parseBoolean((String) value);
     }
+    return false;  // Si no es ni Boolean ni String, retorna false por defecto
+}
 
-    public boolean getBoolean(boolean keyIgnition) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'getBoolean'");
-    }  
+public double getDouble(String key) {
+    Object value = attributes.get(key);
+    if (value instanceof Number) {
+        return ((Number) value).doubleValue();
+    } else if (value instanceof String) {
+        try {
+            return Double.parseDouble((String) value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("No se puede convertir el valor a double: " + value);
+        }
+    }
+    throw new IllegalArgumentException("El atributo '" + key + "' no es un número válido.");
+}
+
+
+
+    
+
+    
 }
