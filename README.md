@@ -26,30 +26,6 @@ El objetivo principal del microservicio es **procesar y gestionar eventos relaci
 
 ---
 
-## Estructura del Proyecto
-
-```
-TRACCAR_EVENTS_JAVA/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── traccar/
-│   │   │           ├── controller/     # Controladores REST
-│   │   │           ├── model/          # Modelos de datos (Eventos)
-│   │   │           ├── repository/     # Acceso a base de datos
-│   │   │           ├── service/        # Lógica de negocio
-│   │   │           └── TraccarEventsApplication.java  # Punto de entrada
-│   │   └── resources/
-│   │       ├── application.properties  # Configuración del proyecto
-│   │       └── data/                   # Archivos auxiliares o de prueba
-├── Dockerfile                          # Para contenerizar el servicio
-├── pom.xml                             # Archivo Maven para dependencias
-└── README.md                           # Documentación del proyecto
-```
-
----
-
 ## Clonar
 
 ### Pasos:
